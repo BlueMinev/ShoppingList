@@ -4,50 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ListActivity">
 
     <Button
-        android:id="@+id/spoiltActivity"
+        android:id="@+id/cupboardActivity2"
         android:layout_width="87dp"
         android:layout_height="87dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="16dp"
-        android:text="🥛"
-        android:textAlignment="center"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/listActivity" />
-
-    <Button
-        android:id="@+id/listActivity"
-        android:layout_width="87dp"
-        android:layout_height="87dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginBottom="16dp"
-        android:text="🛒"
-        android:textAlignment="center"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cupboardActivity" />
-
-    <TextView
-        android:id="@+id/pageName"
-        android:layout_width="353dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="29dp"
-        android:text="CUPBOARD"
-        android:textAlignment="center"
-        android:textSize="48sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/cupboardActivity"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
         android:layout_marginStart="29dp"
         android:layout_marginBottom="16dp"
         android:text="🚪"
@@ -56,11 +18,48 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ListView"
-        android:layout_width="409dp"
-        android:layout_height="524dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="80dp" />
+    <Button
+        android:id="@+id/spoiltActivity2"
+        android:layout_width="87dp"
+        android:layout_height="87dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="12dp"
+        android:text="🥛"
+        android:textAlignment="center"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+        android:id="@+id/listActivity2"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginBottom="12dp"
+        android:text="🛒"
+        android:textAlignment="center"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/pageName2"
+        android:layout_width="353dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="29dp"
+        android:text="SHOPPING LIST"
+        android:textAlignment="center"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="409dp"
+        android:layout_height="532dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="76dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
