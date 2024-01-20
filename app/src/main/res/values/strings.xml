@@ -43,4 +43,10 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="spoiltText">🥛</string>
+    <string name="cupboardTitle">CUPBOARD</string>
+    <string name="listText">🛒</string>
+    <string name="add_your_item_hint">Add Your Item</string>
+    <string name="cupboardText">🚪</string>
+    <string name="enterText">✔️</string>
 </resources>

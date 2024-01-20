@@ -60,6 +60,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="409dp"
         android:layout_height="532dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="76dp" />
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pageName2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

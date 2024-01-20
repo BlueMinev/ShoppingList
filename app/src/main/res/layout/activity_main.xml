@@ -12,7 +12,7 @@
         android:layout_height="87dp"
         android:layout_marginStart="36dp"
         android:layout_marginBottom="16dp"
-        android:text="🥛"
+        android:text="@string/spoiltText"
         android:textAlignment="center"
         android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,7 +24,7 @@
         android:layout_height="87dp"
         android:layout_marginStart="35dp"
         android:layout_marginBottom="16dp"
-        android:text="🛒"
+        android:text="@string/listText"
         android:textAlignment="center"
         android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +37,7 @@
         android:layout_marginStart="29dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="29dp"
-        android:text="CUPBOARD"
+        android:text="@string/cupboardTitle"
         android:textAlignment="center"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,17 +50,41 @@
         android:layout_height="110dp"
         android:layout_marginStart="29dp"
         android:layout_marginBottom="16dp"
-        android:text="🚪"
+        android:text="@string/cupboardText"
         android:textAlignment="center"
         android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ListView"
-        android:layout_width="409dp"
-        android:layout_height="524dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="80dp" />
+    <ListView
+        android:id="@+id/cupboard_listView"
+        android:layout_width="420dp"
+        android:layout_height="509dp"
+        android:layout_weight="1"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </ListView>
+
+    <EditText
+        android:id="@+id/cupboard_itemInput"
+        android:layout_width="268dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="18dp"
+        android:ems="10"
+        android:hint="@string/add_your_item_hint"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/cupboardActivity"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/cupboard_enterButton"
+        android:layout_width="68dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginBottom="42dp"
+        android:text="@string/enterText"
+        app:layout_constraintBottom_toTopOf="@+id/spoiltActivity"
+        app:layout_constraintStart_toEndOf="@+id/cupboard_itemInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
