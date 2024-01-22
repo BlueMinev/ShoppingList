@@ -58,10 +58,12 @@
 
     <ListView
         android:id="@+id/cupboard_listView"
-        android:layout_width="420dp"
-        android:layout_height="509dp"
+        android:layout_width="408dp"
+        android:layout_height="452dp"
+        android:layout_marginTop="22dp"
         android:layout_weight="1"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pageName">
 
     </ListView>
 
