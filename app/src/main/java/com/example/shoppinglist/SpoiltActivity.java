@@ -10,9 +10,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.File;
@@ -37,10 +39,8 @@ public class SpoiltActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spoilt);
         BottomNavigationView mNavigationView = (BottomNavigationView) findViewById(R.id.navbar);
-
         if (mNavigationView != null) {
-            mNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
-        }
+            mNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);}
         mSpoiltList = (ListView) findViewById(R.id.Spoilt_listview);
         mAddItem = (EditText) findViewById(R.id.Spoilt_itemInput);
         mAddButton = (Button) findViewById(R.id.Spoilt_enterButton);
@@ -110,9 +110,12 @@ public class SpoiltActivity extends AppCompatActivity implements
             FileInputStream FIS = new FileInputStream(readFrom);
             FIS.read(content);
             return new String(content);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
+            writeFile("Add your own!");
             throw new RuntimeException(e);
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
 

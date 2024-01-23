@@ -2,6 +2,7 @@ package com.example.shoppinglist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.system.ErrnoException;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.File;
@@ -35,16 +37,17 @@ public class MainActivity extends AppCompatActivity implements
 
     ArrayAdapter<String> mAdapter;
     protected void onCreate(Bundle savedInstanceState) {
+        File path = getApplicationContext().getFilesDir();
+        File check = new File(path, "cupboards.txt");
+        if(!check.exists()){
+            setUpFiles();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView mNavigationView = (BottomNavigationView) findViewById(R.id.navbar);
-        String list=readFile();
-        if (list == ""){
-            setUpFiles();
-        }
         if (mNavigationView != null) {
-            mNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
-        }
+            mNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);}
+        String list=readFile();
         mCupboardList = (ListView) findViewById(R.id.cupboard_listView);
         mAddItem = (EditText) findViewById(R.id.cupboard_itemInput);
         mAddButton = (Button) findViewById(R.id.cupboard_enterButton);
@@ -138,7 +141,8 @@ public class MainActivity extends AppCompatActivity implements
             setUpFiles();
             throw new RuntimeException(e);
 
-        } catch (IOException e) {
+    }
+        catch (IOException e) {
             throw new RuntimeException(e);
         }
 
