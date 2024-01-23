@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity  {
     private ListView mCupboardList;
     private EditText mAddItem;
     private Button mAddButton;
-    private ArrayAdapter<String> mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,34 +48,12 @@ public class MainActivity extends AppCompatActivity  {
                 "Android", "iPhone", "WindowsMobile" };
 
         final ArrayList<String> lists = new ArrayList<String>();
-       // for (int i = 0; i < values.length; ++i) {
-        //    lists.add(values[i]);
-        //}
-        final String filename = "cupboardfile";
-
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(filename);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        InputStreamReader inputStreamReader =
-                new InputStreamReader(fis, StandardCharsets.UTF_8);
-        StringBuilder stringBuilder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
-            String line = reader.readLine();
-            while (line != null) {
-                lists.add(line);
-            }
-        } catch (IOException e) {
-            // Error occurred when opening raw file for reading.
-        } finally {
+       for (int i = 0; i < values.length; ++i) {
+            lists.add(values[i]);
         }
 
-
-        mAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,lists);
+         ArrayAdapter mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,lists);
         mCupboardList.setAdapter(mAdapter);
-
         mAddButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String item = mAddItem.getText().toString();
@@ -84,6 +63,17 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
     }
-
+    @Override
+    protected void onDestroy(){
+        File path = getApplicationContext().getFilesDir();
+        try {
+            FileOutputStream writer = new FileOutputStream( new File(path,"cupboardlist.txt"));
+    //        writer.write(lists.toString().getBytes());
+      //      writer.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        super.onDestroy();
+    }
 }
 
