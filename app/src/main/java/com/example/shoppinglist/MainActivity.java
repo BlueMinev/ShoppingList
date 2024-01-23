@@ -1,25 +1,18 @@
 package com.example.shoppinglist;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.BufferedReader;
@@ -29,55 +22,50 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.jar.Attributes;
-import java.util.stream.Collectors;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener{
+        NavigationView.OnNavigationItemSelectedListener {
 
-    BottomNavigationView navbar;
     private ListView mCupboardList;
     private EditText mAddItem;
     private Button mAddButton;
 
-    @Override
+    ArrayList<String> lists = new ArrayList<>();
+
+    ArrayAdapter<String> mAdapter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView mNavigationView = (BottomNavigationView) findViewById(R.id.navbar);
-
+        String list=readFile();
         if (mNavigationView != null) {
             mNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
         }
         mCupboardList = (ListView) findViewById(R.id.cupboard_listView);
         mAddItem = (EditText) findViewById(R.id.cupboard_itemInput);
         mAddButton = (Button) findViewById(R.id.cupboard_enterButton);
-        String[] values = new String[]{"Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-                "Android", "iPhone", "WindowsMobile"};
-
-        final ArrayList<String> lists = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            lists.add(values[i]);
-        }
-
-        ArrayAdapter mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lists);
+        setUpFile();
+        ArrayList<String> lists = new ArrayList<String>(Arrays.asList(list.split("\n")));
+        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lists);
         mCupboardList.setAdapter(mAdapter);
-        mAddButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                String item = mAddItem.getText().toString();
-                mAdapter.add(item);
-                mAdapter.notifyDataSetChanged();
-                mAddItem.setText("");
-            }
-        });}
+        mAddButton.setOnClickListener(this::onClick);
+
+    }
+
+
+
+    public void onClick(View v) {
+        String item = mAddItem.getText().toString();
+        mAdapter.add(item);
+        mAdapter.notifyDataSetChanged();
+        mAddItem.setText("");
+        System.out.println("clicked");
+        writeFile(item);
+        System.out.println("after write"+readFile());}
 @Override
         public boolean onNavigationItemSelected(MenuItem item) {
             // Handle navigation view item clicks here.
@@ -100,22 +88,41 @@ public class MainActivity extends AppCompatActivity implements
 
 
 
+    public void writeFile(String item) {
+        System.out.println("item to write " +item);
+        item=item + "\n";
+        try {
+            File path=getApplicationContext().getFilesDir();
+            FileOutputStream FOS = openFileOutput("cupboards.txt",MODE_APPEND);
+            FOS.write(item.getBytes(StandardCharsets.UTF_8));
+            Toast.makeText(getApplicationContext(),"success",Toast.LENGTH_LONG).show();
+            FOS.close();
+            System.out.println(readFile());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+        public void setUpFile(){
+        writeFile("Add your items below\n");
+        }
 
+    public String readFile() {
+        File path = getApplicationContext().getFilesDir();
+        File readFrom = new File(path, "cupboards.txt");
+        byte[] content = new byte[(int) readFrom.length()];
+        ArrayList<String> lists = new ArrayList<>();
+        try {
+            FileInputStream FIS = new FileInputStream(readFrom);
+            FIS.read(content);
+            return new String(content);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
 
-        @Override
-        protected void onDestroy() {
-            File path = getApplicationContext().getFilesDir();
-            try {
-                FileOutputStream writer = new FileOutputStream(new File(path, "cupboardlist.txt"));
-                //        writer.write(lists.toString().getBytes());
-                //      writer.close();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            super.onDestroy();
         }
 
 
-    };
+    }
+
+}
 

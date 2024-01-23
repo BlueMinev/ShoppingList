@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
 
-    private String[] localDataSet;
+    private final String[] localDataSet;
 
     /**
      * Provide a reference to the type of views that you are using
