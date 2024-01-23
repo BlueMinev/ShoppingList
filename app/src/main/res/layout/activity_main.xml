@@ -29,36 +29,37 @@
         app:layout_constraintTop_toBottomOf="@+id/cupboard_listView" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="410dp"
-        android:layout_height="111dp"
-        android:layout_marginTop="9dp"
+        android:layout_width="414dp"
+        android:layout_height="62dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cupboard_itemInput">
+        app:layout_constraintTop_toBottomOf="@+id/cupboard_itemInput"
+        app:layout_constraintVertical_bias="0.989">
+
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="57dp"
             android:layout_gravity="bottom"
-            android:layout_marginStart="4dp"
-            android:layout_marginBottom="12dp"
-            android:backgroundTint="@color/cardview_dark_background"
-            >
+            android:backgroundTint="@color/cardview_light_background">
+
             <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-                app:menu="@menu/bottom_menu"
-            />
+                android:id="@+id/navbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardview_light_background"
+
+            app:menu="@menu/bottom_menu" />
         </com.google.android.material.bottomappbar.BottomAppBar>
-
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <ListView
         android:id="@+id/cupboard_listView"
-        android:layout_width="399dp"
-        android:layout_height="514dp"
+        android:layout_width="403dp"
+        android:layout_height="623dp"
         android:layout_marginStart="3dp"
         android:layout_marginTop="12dp"
         android:layout_weight="1"
