@@ -5,29 +5,29 @@
     android:id="@+id/conlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListActivity">
+    tools:context=".SpoiltList">
 
     <EditText
-        android:id="@+id/List_itemInput"
+        android:id="@+id/Spoilt_itemInput"
         android:layout_width="268dp"
         android:layout_height="63dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="38dp"
         android:ems="10"
         android:hint="@string/add_your_item_hint"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/List_listView" />
+        app:layout_constraintTop_toBottomOf="@+id/Spoilt_listview" />
 
     <Button
-        android:id="@+id/List_enterButton"
+        android:id="@+id/Spoilt_enterButton"
         android:layout_width="68dp"
         android:layout_height="54dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="47dp"
         android:text="@string/enterText"
-        app:layout_constraintStart_toEndOf="@+id/List_itemInput"
-        app:layout_constraintTop_toBottomOf="@+id/List_listView" />
+        app:layout_constraintStart_toEndOf="@+id/Spoilt_itemInput"
+        app:layout_constraintTop_toBottomOf="@+id/Spoilt_listview" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="414dp"
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/List_itemInput"
+        app:layout_constraintTop_toBottomOf="@+id/Spoilt_itemInput"
         app:layout_constraintVertical_bias="0.989">
 
 
@@ -58,7 +58,7 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <ListView
-        android:id="@+id/List_listView"
+        android:id="@+id/Spoilt_listview"
         android:layout_width="403dp"
         android:layout_height="623dp"
         android:layout_marginStart="3dp"

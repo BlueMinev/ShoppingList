@@ -15,14 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,13 +39,15 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         BottomNavigationView mNavigationView = (BottomNavigationView) findViewById(R.id.navbar);
         String list=readFile();
+        if (list == ""){
+            setUpFiles();
+        }
         if (mNavigationView != null) {
             mNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
         }
         mCupboardList = (ListView) findViewById(R.id.cupboard_listView);
         mAddItem = (EditText) findViewById(R.id.cupboard_itemInput);
         mAddButton = (Button) findViewById(R.id.cupboard_enterButton);
-        setUpFile();
         ArrayList<String> lists = new ArrayList<String>(Arrays.asList(list.split("\n")));
         mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lists);
         mCupboardList.setAdapter(mAdapter);
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements
         startActivity(intent);
         return true;
     } else if (item.getItemId() == R.id.Spoilt) {
-        Intent intent2 = new Intent(this,SpoiltList.class);
+        Intent intent2 = new Intent(this,SpoiltActivity.class);
         startActivity(intent2);
         System.out.println("pressed");
         return true;
@@ -103,8 +102,27 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-        public void setUpFile(){
-        writeFile("Add your items below\n");
+        public void setUpFiles(){
+            String item = "Add your own !";
+            try {
+                File path=getApplicationContext().getFilesDir();
+                FileOutputStream FOS = openFileOutput("cupboards.txt",MODE_APPEND);
+                FOS.write(item.getBytes(StandardCharsets.UTF_8));
+                Toast.makeText(getApplicationContext(),"success",Toast.LENGTH_LONG).show();
+                FOS.close();
+                path=getApplicationContext().getFilesDir();
+                 FOS = openFileOutput("spoilt.txt",MODE_APPEND);
+                FOS.write(item.getBytes(StandardCharsets.UTF_8));
+                Toast.makeText(getApplicationContext(),"success",Toast.LENGTH_LONG).show();
+                FOS.close();
+                 path=getApplicationContext().getFilesDir();
+                 FOS = openFileOutput("shopping.txt",MODE_APPEND);
+                FOS.write(item.getBytes(StandardCharsets.UTF_8));
+                Toast.makeText(getApplicationContext(),"success",Toast.LENGTH_LONG).show();
+                FOS.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     public String readFile() {
@@ -116,9 +134,12 @@ public class MainActivity extends AppCompatActivity implements
             FileInputStream FIS = new FileInputStream(readFrom);
             FIS.read(content);
             return new String(content);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
+            setUpFiles();
             throw new RuntimeException(e);
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
 

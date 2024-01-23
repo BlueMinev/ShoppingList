@@ -13,7 +13,7 @@
         android:theme="@style/Theme.ShoppingList"
         tools:targetApi="34">
         <activity
-            android:name=".SpoiltList"
+            android:name=".SpoiltActivity"
             android:exported="false" />
         <activity
             android:name=".ListActivity"

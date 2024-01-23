@@ -23,10 +23,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ListActivity extends AppCompatActivity implements
+public class SpoiltActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener {
 
-    private ListView mShoppingList;
+    private ListView mSpoiltList;
     private EditText mAddItem;
     private Button mAddButton;
 
@@ -35,20 +35,20 @@ public class ListActivity extends AppCompatActivity implements
     ArrayAdapter<String> mAdapter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        setContentView(R.layout.activity_spoilt);
         BottomNavigationView mNavigationView = (BottomNavigationView) findViewById(R.id.navbar);
 
         if (mNavigationView != null) {
             mNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
         }
-        mShoppingList = (ListView) findViewById(R.id.List_listView);
-        mAddItem = (EditText) findViewById(R.id.List_itemInput);
-        mAddButton = (Button) findViewById(R.id.List_enterButton);
+        mSpoiltList = (ListView) findViewById(R.id.Spoilt_listview);
+        mAddItem = (EditText) findViewById(R.id.Spoilt_itemInput);
+        mAddButton = (Button) findViewById(R.id.Spoilt_enterButton);
 
         String list=readFile();
         ArrayList<String> lists = new ArrayList<String>(Arrays.asList(list.split("\n")));
         mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lists);
-        mShoppingList.setAdapter(mAdapter);
+        mSpoiltList.setAdapter(mAdapter);
         mAddButton.setOnClickListener(this::onClick);
 
     }
@@ -90,7 +90,7 @@ public class ListActivity extends AppCompatActivity implements
         item=item + "\n";
         try {
             File path=getApplicationContext().getFilesDir();
-            FileOutputStream FOS = openFileOutput("shopping.txt",MODE_APPEND);
+            FileOutputStream FOS = openFileOutput("spoilt.txt",MODE_APPEND);
             FOS.write(item.getBytes(StandardCharsets.UTF_8));
             Toast.makeText(getApplicationContext(),"success",Toast.LENGTH_LONG).show();
             FOS.close();
@@ -103,7 +103,7 @@ public class ListActivity extends AppCompatActivity implements
 
     public String readFile() {
         File path = getApplicationContext().getFilesDir();
-        File readFrom = new File(path, "shopping.txt");
+        File readFrom = new File(path, "spoilt.txt");
         byte[] content = new byte[(int) readFrom.length()];
         ArrayList<String> lists = new ArrayList<>();
         try {
