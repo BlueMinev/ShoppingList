@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
         public void setUpFiles(){
-            String item = "Add your own !";
+            String item = "Add your own !\n";
             try {
                 File path=getApplicationContext().getFilesDir();
                 FileOutputStream FOS = openFileOutput("cupboards.txt",MODE_APPEND);

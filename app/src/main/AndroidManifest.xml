@@ -14,12 +14,14 @@
         tools:targetApi="34">
         <activity
             android:name=".SpoiltActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ListActivity"
             android:exported="false"
             android:label="@string/title_activity_list"
-            android:theme="@style/Theme.ShoppingList" />
+            android:theme="@style/Theme.ShoppingList"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
